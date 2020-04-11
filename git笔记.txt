@@ -1,0 +1,79 @@
+一、git安装
+    https://git-scm.com/downloads
+    淘宝镜像下载git-for-windows Mirror:https://npm.taobao.org/mirrors/git-for-windows/
+安装完成后，还需要最后一步设置，在命令行输入：
+$ git config --global user.name "zr"
+$ git config --global user.email "624039355@qq.com"
+
+二、使用
+    1.git init 把这个目录变成git可以管理的仓库。
+    2.git add . 把文件添加到版本库中，使用命令 git add .添加到暂存区里面去。
+    3.git commit -m "说明xxxx"  把修改提交到本地仓库。
+    4.git remote add origin https://e.coding.net/624039355/mydemo01.git  关联到远程库。
+    5.git pull --rebase origin master
+  获取远程库与本地同步合并（如果远程库不为空必须做这一步，否则后面的提交会失败）。
+    6.git push -u origin master
+
+  把本地库的内容推送到远程，使用 git push命令，实际上是把当前分支master推送到远程。
+      加了参数-u后，以后即可直接用git push 代替git push origin master
+    7.git status 状态查询命令。
+    8.git reset
+    9.git clone  https://xxx.git 拉取远程代码
+      git clone -b other https://e.coding.net/624039355/mydemo01.git  拉取分支远程代码
+
+三、git add  添加到暂存区
+    ·  git add -A  提交所有变化
+
+    ·  git add -u  提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+
+    ·  git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+
+四、git commit amend
+    有时候我们提交完了才发现漏掉了几个文件没有添加，或者提交信息写错了。 此时，可以运行带有 --amend 选项的提交命令来重新提交
+    $ git commit -m 'initial commit'
+    $ git add forgotten_file
+    $ git commit --amend
+
+五、git reset三种模式  https://www.jianshu.com/p/c2ec5f06cf1a
+    git reset --hard v0.1  提交点:可用ID或标签
+    git reflog 查询所有提交点
+
+六、git checkout
+
+七、git修改remote地址
+    方法1:git remote set-url origin xxxxx.git
+    方法2:git remote rm origin
+          git remote add origin xxxxx.git
+    修改默认pull和push分支：
+    git branch --set-upstream-to=origin/develop develop
+    origin/develop develop为要设置的默认分支
+
+八、给本地和远程仓库重命名
+    1.重命名本地分支
+      git branch -m new-name 如果当前在要重命名的分支
+      git branch -m old-name new-name 如果当前不在要重命名的分支
+    2.删除远程旧名称分支并且push新名称分支
+      git push origin :old-name new-name
+    3.关联新名称的本地分支和远程分支
+      git push origin -u new-name
+
+九、分别查看仓库local global system的配置信息
+    git config --local --list
+    git config --global --list
+    git config --system --list
+    查看远程仓库地址 git remote -v
+    git config -l
+
+十、git merge最简洁用法
+    1.开发分支（dev）上的代码达到上线的标准后，要合并到 master 分支 
+      git checkout dev
+      git pull
+      git checkout master
+      git merge dev
+      git push -u origin master
+    2.当master代码改动了，需要更新开发分支（dev）上的代码
+      git checkout master 
+      git pull 
+      git checkout dev
+      git merge master 
+      git push -u origin dev

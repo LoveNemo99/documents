@@ -1,0 +1,46 @@
+JAVA_HOME
+C:\Program Files\Java\jdk1.8.0_45
+C:\Program Files\Java\jdk1.7.0_80
+D:\Java\jdk1.7.0_80
+C:\Java\jdk1.7.0_80
+
+CLASSPATH
+.;%JAVA_HOME%/lib/dt.jar;%JAVA_HOME%/lib/tools.jar;
+
+.;%JAVA_HOME%/lib;%JAVA_HOME%/lib/tools.jar;
+
+Path
+%JAVA_HOME%/bin;%JAVA_HOME%/jre/bin;
+
+
+service.bat install
+service.bat remove
+
+CATALINA_HOME: C:\apache-tomcat
+CATALINA_BASE: D:\apache-tomcat
+CALSSPATH:%CATALINA_HOME%\lib\servlet-api.jar;
+PATH:%CATALINA_HOME%\lib\servlet-api.jar;
+
+Path: D:\mysql\bin;
+C:\mysql\bin;
+mysql-5.6.38-winx64\bin;
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+FLUSH   PRIVILEGES;
+
+basedir = c:\mysql
+datadir = c:\mysql\data
+
+mysqld -install
+net start mysql
+
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456')
+
+mysqladmin -u root password "newpass"
+如果root已经设置过密码，采用如下方法
+mysqladmin -u root password oldpass "newpass"
+ 
+
+
+【sql server查看端口】
+exec sys.sp_readerrorlog 0, 1, 'listening'
